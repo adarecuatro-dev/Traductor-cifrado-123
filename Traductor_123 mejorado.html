@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traductor Automático de Letras  Símbolos</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
+  h2 { text-align: center; margin-bottom: 20px; }
+  textarea { width: 100%; height: 120px; margin-bottom: 10px; font-size: 18px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; resize: vertical; }
+  button { width: 100%; padding: 15px; margin: 5px 0; font-size: 18px; border: none; border-radius: 8px; background: #007bff; color: white; cursor: pointer; }
+  button:hover { background: #0056b3; }
+</style>
+</head>
+<body>
+
+<h2>Traductor del cifrado  "?123" </h2>
+
+<textarea id="input" placeholder="Escribe letras o símbolos aquí..."></textarea>
+
+<button onclick="document.getElementById('output').value = traducir(document.getElementById('input').value)">Traducir</button>
+<button onclick="copiar()">Copiar resultado</button>
+
+<textarea id="output" readonly placeholder="Aquí aparecerá el resultado..."></textarea>
+
+<script>
+// Mapas de equivalencia
+const letras = "qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑZXCVBNM";
+const simbolos = "1234567890@#€_&-+()/*\"':;!?~`|•÷×§£¥$¢^°={}\%©®™[]";
+
+// Crear diccionarios de conversión
+const mapa = {};
+for (let i = 0; i < letras.length; i++) {
+  mapa[letras[i]] = simbolos[i];
+  mapa[simbolos[i]] = letras[i];
+}
+
+// Traducción automática (letra  símbolo)
+function traducir(texto) {
+  return texto
+    .split('')
+    .map(c => mapa[c.toLowerCase()] || c)
+    .join('');
+}
+
+// Copiar resultado
+function copiar() {
+  const output = document.getElementById('output');
+  output.select();
+  output.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Texto copiado al portapapeles ");
+}
+</script>
+
+</body>
+</html> 
